@@ -268,12 +268,21 @@ android_app_import {
 	product_specific: true,
 }
 
-sh_binary {
+cc_prebuilt_binary {
 	name: "android.hardware.bluetooth@1.0-service-qti",
 	owner: "samsung",
-	src: "proprietary/vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti",
-	filename: "android.hardware.bluetooth@1.0-service-qti",
-	sub_dir: "hw",
+	target: {
+		android_arm64: {
+			srcs: ["proprietary/vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti"],
+		},
+	},
+	compile_multilib: "64",
+	check_elf_files: false,
+	strip: {
+		none: true,
+	},
+	prefer: true,
+	relative_install_path: "hw",
 	soc_specific: true,
 }
 
